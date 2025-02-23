@@ -1,0 +1,60 @@
+//
+//  ChatRoomScreen.swift
+//  WhatsAppClone
+//
+//  Created by S, Praveen (Cognizant) on 09/02/25.
+//
+
+import SwiftUI
+
+struct ChatRoomScreen: View {
+    var body: some View {
+        MessageListView()
+        .safeAreaInset(edge: .bottom) {
+            TextInputArea()
+        }
+        
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar() {
+            leadingButton()
+            trailingButton()
+        }
+        .toolbarVisibility(.hidden, for: .tabBar)
+    }
+    @ToolbarContentBuilder
+    private func trailingButton () -> some ToolbarContent {
+        ToolbarItemGroup(placement: .topBarTrailing) {
+            Button {
+                
+            }
+            label: {
+                Image(systemName: "video")
+                    .padding()
+                Image(systemName: "phone")
+            }
+            .bold()
+        }
+    }
+    private func leadingButton () -> some ToolbarContent {
+        ToolbarItemGroup(placement: .topBarLeading) {
+            Button {
+                
+            }
+            label: {
+                HStack{
+                    Circle()
+                        .frame(width: 40 , height: 35)
+                    Text("Praveen")
+                        .bold()
+                }
+            }
+        }
+    }
+}
+
+#Preview {
+    NavigationStack{
+        ChatRoomScreen()
+    }
+    
+}
