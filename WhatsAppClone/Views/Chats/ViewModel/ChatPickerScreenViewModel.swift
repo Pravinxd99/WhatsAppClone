@@ -14,6 +14,10 @@ enum ChannelCreationRoute : Hashable{
     case addGroupChatMembers
     case setUpGroupChat
 }
+
+enum maxChannelParticipants {
+    static let maxCount = 12
+}
 final class ChatPickerScreenViewModel : ObservableObject {
     
     @Published var navItem = [ChannelCreationRoute]()
@@ -32,6 +36,11 @@ final class ChatPickerScreenViewModel : ObservableObject {
         else {
             selectedChatPartners.append(user)
         }
+    }
+    
+    var isSelectedPrtnerAvailable : Bool {
+        let status = !selectedChatPartners.isEmpty ? true : false
+        return status
     }
     
     
