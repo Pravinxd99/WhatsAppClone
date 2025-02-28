@@ -70,9 +70,7 @@ final class AuthManager : AuthProvider {
         catch {
             print("An error occured while creating the account")
             throw AuthError.ErrorCreatingUserAccount(errordescription: error.localizedDescription)
-            
         }
-        
     }
     
     func saveUserInfoInDataBase(user: UserItem) async throws {
@@ -81,8 +79,8 @@ final class AuthManager : AuthProvider {
             try await FireBaseConstants.Reference.child(user.id).setValue(userDictionary)
         }// child ("users") is like a folder , child(user.id) is like the key to that respective values think of this like unique value to access and setvalue is the usual way to write values
         // it appears as a tree like struct in realtime db
-        /*users
-         uid
+        /*users ->foler
+         uid -> path to the partucular user
          uid
          username
          email*/
@@ -91,9 +89,7 @@ final class AuthManager : AuthProvider {
             throw AuthError.ErrorSavingUserToDb(errordescription: error.localizedDescription)
         }
     }
-    
-    
-    
+   
     func fetchCurrentUserInfo()  {
         guard let uid = Auth.auth().currentUser?.uid else {return}
         FireBaseConstants.Reference.child(uid).observe(.value) { [weak self] snapshot  in
