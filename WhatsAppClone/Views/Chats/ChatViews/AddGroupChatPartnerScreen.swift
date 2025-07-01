@@ -76,6 +76,7 @@ extension AddGroupChatPartnerScreen {
         ToolbarItem(placement: .topBarTrailing) {
             Button("Next"){
                 
+                viewModel.navItem.append(.setUpGroupChat)
             }
             .bold()
             .disabled(!viewModel.isSelectedPrtnerAvailable)

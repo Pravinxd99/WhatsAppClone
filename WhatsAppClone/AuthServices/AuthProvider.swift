@@ -79,7 +79,7 @@ final class AuthManager : AuthProvider {
             try await FireBaseConstants.Reference.child(user.id).setValue(userDictionary)
         }// child ("users") is like a folder , child(user.id) is like the key to that respective values think of this like unique value to access and setvalue is the usual way to write values
         // it appears as a tree like struct in realtime db
-        /*users ->foler
+        /*users ->folder
          uid -> path to the partucular user
          uid
          username
@@ -122,7 +122,7 @@ final class AuthManager : AuthProvider {
             
         }
         catch {
-            print("There is some issue with Logging in \(email)")
+            print("There is some issue with Logging in either username or password is wrong  \(email)")
             throw AuthError.ErrorCreatingUserAccount(errordescription: error.localizedDescription)
         }
     }

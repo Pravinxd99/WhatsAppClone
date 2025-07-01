@@ -42,7 +42,10 @@ struct sampleUserItem {
         UserItem(uid : "uid7", username: "Praveen7", email: "sashapraveen7@gmail.com"),
         UserItem(uid : "uid8", username: "Praveen8", email: "sashapraveen8@gmail.com"),
         UserItem(uid : "uid9", username: "Praveen9", email: "sashapraveen9@gmail.com"),
-        UserItem(uid : "uid10",username:"Praveen10", email: "sashapraveen10 @gmail.com"),
+        UserItem(uid : "uid10",username:"Praveen10", email: "sashapraveen10@gmail.com"),
+        UserItem(uid : "uid11",username:"Praveen11", email: "sashapraveen11@gmail.com"),
+        UserItem(uid : "uid12",username:"Praveen12", email: "sashapraveen12@gmail.com"),
+        UserItem(uid : "uid13",username:"Praveen13", email: "sashapraveen13@gmail.com")
     ]
 }
 

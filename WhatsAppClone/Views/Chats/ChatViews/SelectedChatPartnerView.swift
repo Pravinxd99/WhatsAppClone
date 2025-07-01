@@ -16,41 +16,44 @@ struct SelectedChatPartnerView: View {
             HStack{
                 
                 ForEach (users) { item in
+                    
                     chatPartnerView(item)
                 }
+                
             }
         }
     }
-    
-    private func chatPartnerView (_ user : UserItem) -> some View {
-        VStack {
-            Circle()
-                .fill(.gray)
-                .frame(width: 60 , height: 60)
-                .overlay(alignment: .topTrailing) {
-                    cancelButton(user: user)
-                }
-            Text(user.username)
-        }
-    }
-    
-    private func cancelButton ( user : UserItem) -> some View {
         
-        Button {
-            closure(user)
-            
-        }label: {
-            Image(systemName: "xmark")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 10 ,height: 10)
-                .padding(5)
-                .foregroundStyle(Color(.systemGray))
-                .background(Color(.systemGray6))
-                .clipShape(Circle())
+        private func chatPartnerView (_ user : UserItem) -> some View {
+            VStack {
+                Circle()
+                    .fill(.gray)
+                    .frame(width: 60 , height: 60)
+                    .overlay(alignment: .topTrailing) {
+                        cancelButton(user: user)
+                    }
+                Text(user.username)
+            }
         }
-       
-    }
+        
+        private func cancelButton ( user : UserItem) -> some View {
+            
+            Button {
+                closure(user)
+                
+            }label: {
+                Image(systemName: "xmark")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 10 ,height: 10)
+                    .padding(5)
+                    .foregroundStyle(Color(.systemGray))
+                    .background(Color(.systemGray6))
+                    .clipShape(Circle())
+            }
+            
+        }
+    
 }
 
 #Preview {

@@ -54,7 +54,7 @@ extension ChatPartnerPickerScreen {
         case .addGroupChatMembers:
             AddGroupChatPartnerScreen(viewModel: viewModel)
         case .setUpGroupChat:
-            Text("Add Community Members")
+            NewGroupSetUpScreen(viewModel: viewModel)
         }
     }
 

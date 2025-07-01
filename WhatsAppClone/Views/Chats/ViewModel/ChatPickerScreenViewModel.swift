@@ -18,14 +18,21 @@ enum ChannelCreationRoute : Hashable{
 enum maxChannelParticipants {
     static let maxCount = 12
 }
+//enum  ParticipantCount : Error {
+//    case Default
+//    case maxCountReached( description : String)
+//}
+
 final class ChatPickerScreenViewModel : ObservableObject {
     
     @Published var navItem = [ChannelCreationRoute]()
     @Published var selectedChatPartners = [UserItem]()
+    //@Published var maxCount : ParticipantCount = .Default
     
     var showSelectedUsers : Bool {
         return !selectedChatPartners.isEmpty
     }
+    
     
     func handleItemSelection( _ user : UserItem) {
         if isUserSelected(user) {

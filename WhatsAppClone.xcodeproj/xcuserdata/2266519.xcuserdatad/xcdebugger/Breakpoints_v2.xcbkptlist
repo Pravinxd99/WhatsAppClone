@@ -3,4 +3,52 @@
    uuid = "9EDF4AA3-AA65-46CC-8D56-A9DDA912F11E"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5EF59BBC-DD90-4B01-8EAA-EEC355E52D72"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WhatsAppClone/AuthServices/AuthProvider.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "login(with:and:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5EF59BBC-DD90-4B01-8EAA-EEC355E52D72 - b30c1137194dc2ba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WhatsAppClone.AuthManager.login(with: Swift.String, and: Swift.String) async throws -&gt; ()"
+                  moduleName = "WhatsAppClone.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/2266519/Desktop/WhatsAppClone/WhatsAppClone/AuthServices/AuthProvider.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "117"
+                  endingLineNumber = "117">
+               </Location>
+               <Location
+                  uuid = "5EF59BBC-DD90-4B01-8EAA-EEC355E52D72 - ba11be876796fa4d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for WhatsAppClone.AuthManager.login(with: Swift.String, and: Swift.String) async throws -&gt; ()"
+                  moduleName = "WhatsAppClone.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/2266519/Desktop/WhatsAppClone/WhatsAppClone/AuthServices/AuthProvider.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "117"
+                  endingLineNumber = "117">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

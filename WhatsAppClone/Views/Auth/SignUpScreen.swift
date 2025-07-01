@@ -15,7 +15,7 @@ struct SignUpScreen: View {
             Spacer()
             AuthHeaderView()
             AuthTextField(type: AuthTextField.fieldType.email, text: $authScreenModel.email)
-            AuthTextField(type: AuthTextField.fieldType.custom(placeholder: "U sername", iconname: "at"), text: $authScreenModel.userName)
+            AuthTextField(type: AuthTextField.fieldType.custom(placeholder: "Username", iconname: "at"), text: $authScreenModel.userName)
             AuthTextField(type: AuthTextField.fieldType.password, text: $authScreenModel.password)
             LoginOrCreateAccountButton(title: "Create an Account ->", onTap: {
                 
