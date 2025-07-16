@@ -10,19 +10,24 @@ import SwiftUI
 struct NewGroupSetUpScreen: View {
     @State var groupName : String = ""
     @ObservedObject var viewModel : ChatPickerScreenViewModel
+    var oncreateGroup : (_ channelName : ChannelItem) -> Void
     var body: some View {
         List {
             
             HStack {
-                Circle()
-                    .frame(width: 70 , height: 70)
-                    .foregroundStyle(Color(.systemGray3))
-                    .overlay {
-                        Image(systemName: "camera")
-                            .imageScale(.large)
-                            .frame(width: 100 , height: 50)
-                    }
                 
+                Button {
+                    
+                }label : {
+                    Circle()
+                        .frame(width: 70 , height: 70)
+                        .foregroundStyle(Color(.systemGray3))
+                        .overlay {
+                            Image(systemName: "camera")
+                                .imageScale(.large)
+                                .frame(width: 100 , height: 50)
+                        }
+                }
                 TextField("", text: $groupName , prompt: Text("Group name (optional)") , axis: .vertical)
                 
                    
@@ -40,7 +45,9 @@ struct NewGroupSetUpScreen: View {
                 
             }
             header : {
-                    Text("Participants : 12/12")
+                let count = viewModel.selectedChatPartners.count
+                let maxCount = maxChannelParticipants.maxCount
+                    Text("Participants : \(count)/\(maxCount)"  )
                 }
             .listRowBackground(Color.clear)
             }
@@ -57,10 +64,11 @@ struct NewGroupSetUpScreen: View {
     private func trailingItem () -> some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             Button {
+                viewModel.createGroupChannel(groupName: groupName , completion: oncreateGroup)
                 
              
             }label: {
-                Text("Next")
+                Text("Create")
                     .bold()
             }
             .disabled(viewModel.selectedChatPartners.isEmpty ? true : false)
@@ -76,6 +84,8 @@ struct NewGroupSetUpScreen: View {
 
 #Preview {
     NavigationStack{
-        NewGroupSetUpScreen( viewModel: ChatPickerScreenViewModel())
+        NewGroupSetUpScreen( viewModel: ChatPickerScreenViewModel()){ _ in
+            
+        }
     }
 }

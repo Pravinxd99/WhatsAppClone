@@ -22,8 +22,18 @@ final class RootViewModel : ObservableObject {
                 self?.authModel = latestAuthUser
             }
         
-        
+//        AuthManager.sampleUsers.forEach { email in
+//            registerTestAccount(with: email)
+//        }
+//        
     }
+    
+//    private func registerTestAccount(with email : String) {
+//        Task {
+//            let username = email.replacingOccurrences(of: "gmail.com", with: "")
+//            try? await AuthManager.singletonAuthProvider.createUser(_with: email, _and: "12345678", _also: username)
+//        }
+//    }
     
 }
 /* notes :

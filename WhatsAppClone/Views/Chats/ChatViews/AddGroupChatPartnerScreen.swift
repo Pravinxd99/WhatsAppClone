@@ -22,15 +22,24 @@ struct AddGroupChatPartnerScreen: View {
                 
                 
                 Section{
-                    ForEach(sampleUserItem.sampleUserInstances){ item in
+                    ForEach(viewModel.users){ user in
                         
                         Button {
-                            viewModel.handleItemSelection(item)
+                            viewModel.handleItemSelection(user )
                         } label:{
-                            chatPartnerRowView(user:item ) }
+                            chatPartnerRowView(user:user ) }
                         
                     }
                 }
+                
+                if viewModel.isPaginatable {
+                    loadMoreUsers()
+                }
+            }
+        
+            .alert(isPresented: $viewModel.alertError.errorState) {
+                Alert(title: Text("Error"),message: Text(viewModel.alertError.errorMessageForUser), dismissButton: .default(Text("Ok")))
+                
             }
             .toolbar {
                 addParticipantsItem()
@@ -39,6 +48,14 @@ struct AddGroupChatPartnerScreen: View {
             .animation(.easeInOut, value: viewModel.showSelectedUsers)
             .searchable(text: $searchText ,placement: .navigationBarDrawer(displayMode: .always), prompt: "Search name or number")
         }
+    
+    private func loadMoreUsers () -> some View {
+        ProgressView()
+            .frame(maxWidth: .infinity)
+            .task {
+                await viewModel.fetchUsers()
+            }
+    }
     private func chatPartnerRowView (user : UserItem) -> some View {
         
         ChatPartnerRowView(user: user) {
@@ -87,6 +104,8 @@ extension AddGroupChatPartnerScreen {
 #Preview {
     NavigationStack{
         AddGroupChatPartnerScreen(viewModel: ChatPickerScreenViewModel())
+            
+        
     }
 }
 

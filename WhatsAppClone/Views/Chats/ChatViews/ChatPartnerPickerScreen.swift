@@ -11,31 +11,62 @@ struct ChatPartnerPickerScreen: View {
     @StateObject var viewModel = ChatPickerScreenViewModel()
     @Environment(\.dismiss) private var dismiss
     @State var searchText : String = ""
+    var onCreate : (_ channelName : ChannelItem) -> ()
     
     var body: some View {
+        
+        
         NavigationStack (path: $viewModel.navItem) {
             List {
                 Section {
                     ForEach(NewStuffSection.allCases) { item in
                         HeaderItemView(item: item)
+                        
                             .onTapGesture {
-                                print("Header item tapped: \(item.titleForNewSectionStuff)")
-                                viewModel.navItem.append(.addGroupChatMembers)
-                                print("navItem : \(viewModel.navItem)")
+                                
+                                switch item {
+                                    
+                                case .newGroup:
+                                    print("Header item tapped: \(item.titleForNewSectionStuff)")
+                                    viewModel.navItem.append(.addGroupChatMembers)
+                                    print("navItem : \(viewModel.navItem)")
+                                case .newContact:
+                                    print("Header item tapped: \(item.titleForNewSectionStuff)")
+                                    print("navItem : \(viewModel.navItem)")
+                                case .newCommunity:
+                                    print("Header item tapped: \(item.titleForNewSectionStuff)")
+                                    print("navItem : \(viewModel.navItem)")
+                                }
+                                
+                            
                             }
                     }
                 }
                 Section {
-                    ForEach(0..<10) { item in
-                        ChatPartnerRowView(user: sampleUserItem.sampleUserInstance)
+                    ForEach(viewModel.users) { user in
+                              ChatPartnerRowView(user: user)
+                        
+                        
+                            .onTapGesture {
+                              viewModel.createDirectChannel( chatPartner: user, completion: onCreate)
+                            }
+                            
                     }
                 } header: {
                     Text("Contacts on WhatsApp")
                         .textCase(nil)
                 }
+                
+                if viewModel.isPaginatable{
+                    loadMoreUsers()
+                }
             }
             .toolbar {
                 trailingNavItem()
+            }
+            
+            .onAppear {
+                viewModel.deSelectSelectedChatPartners()
             }
             .navigationTitle("New Chat")
             .navigationDestination(for: ChannelCreationRoute.self) { route in
@@ -44,6 +75,17 @@ struct ChatPartnerPickerScreen: View {
             .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search name or number")
         }
+        
+    }
+    
+    private func loadMoreUsers () -> some View {
+        
+        ProgressView()
+            .frame(maxWidth: .infinity)
+            .listRowBackground(Color.clear)
+            .task {
+                await viewModel.fetchUsers() 
+            }
     }
 }
 
@@ -54,7 +96,7 @@ extension ChatPartnerPickerScreen {
         case .addGroupChatMembers:
             AddGroupChatPartnerScreen(viewModel: viewModel)
         case .setUpGroupChat:
-            NewGroupSetUpScreen(viewModel: viewModel)
+            NewGroupSetUpScreen(viewModel: viewModel, oncreateGroup: onCreate)
         }
     }
 
@@ -134,7 +176,9 @@ enum NewStuffSection: String, CaseIterable, Identifiable, Hashable {
 
 #Preview {
    
-        ChatPartnerPickerScreen()
+    ChatPartnerPickerScreen() {channelName in 
+        
+    }
     
 }
 

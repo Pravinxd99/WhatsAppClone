@@ -97,7 +97,7 @@ final class AuthManager : AuthProvider {
             guard let userDict = snapshot.value as? [String : Any] else {return} // snapshot is nothing but the data received from the user loc
             let loggedInUser = UserItem(dictionary: userDict)
             self?.authState.send(.loggedIn(loggedInUser))
-            print("\(loggedInUser.username) has logged in successfully")
+            print("\(loggedInUser.username) \(loggedInUser.uid) has logged in successfully")
         } withCancel: { error in
             print("failed to get current user info")
         }
@@ -140,5 +140,9 @@ final class AuthManager : AuthProvider {
     }
 }
 
-
+extension AuthManager {
+    
+    
+    static let sampleUsers : [String] = ["QAUser1@gmail.com","QAUser2@gmail.com","QAUser3@gmail.com","QAUser4@gmail.com","QAUser5@gmail.com","QAUser6@gmail.com","QAUser7@gmail.com","QAUser8@gmail.com", "QAUser9@gmail.com", "QAUser10@gmail.com", "QAUser11@gmail.com", "QAUser12@gmail.com", "QAUser13@gmail.com", "QAUser14@gmail.com", "QAUser15@gmail.com", "QAUser16@gmail.com", "QAUser17@gmail.com", "QAUser18@gmail.com", "QAUser19@gmail.com", "QAUser20@gmail.com", "QAUser21@gmail.com", "QAUser22@gmail.com", "QAUser23@gmail.com", "QAUser24@gmail.com", "QAUser25@gmail.com", "QAUser26@gmail.com", "QAUser27@gmail.com", "QAUser28@gmail.com", "QAUser29@gmail.com", "QAUser30@gmail.com", "QAUser31@gmail.com", "QAUser32@gmail.com", "QAUser33@gmail.com", "QAUser34@gmail.com", "QAUser35@gmail.com", "QAUser36@gmail.com", "QAUser37@gmail.com", "QAUser38@gmail.com", "QAUser39@gmail.com", "QAUser40@gmail.com", "QAUser41@gmail.com", "QAUser42@gmail.com", "QAUser43@gmail.com", "QAUser44@gmail.com", "QAUser45@gmail.com", "QAUser46@gmail.com", "QAUser47@gmail.com", "QAUser48@gmail.com", "QAUser49@gmail.com", "QAUser50@gmail.com"]
+}
 
