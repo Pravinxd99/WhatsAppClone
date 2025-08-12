@@ -76,7 +76,7 @@ final class AuthManager : AuthProvider {
     func saveUserInfoInDataBase(user: UserItem) async throws {
         let userDictionary = ["uid" : user.id , "username" : user.username , "email" : user.email]
         do {
-            try await FireBaseConstants.Reference.child(user.id).setValue(userDictionary)
+            try await FireBaseConstants.UserReference.child(user.id).setValue(userDictionary)
         }// child ("users") is like a folder , child(user.id) is like the key to that respective values think of this like unique value to access and setvalue is the usual way to write values
         // it appears as a tree like struct in realtime db
         /*users ->folder
@@ -92,7 +92,7 @@ final class AuthManager : AuthProvider {
    
     func fetchCurrentUserInfo()  {
         guard let uid = Auth.auth().currentUser?.uid else {return}
-        FireBaseConstants.Reference.child(uid).observe(.value) { [weak self] snapshot  in
+        FireBaseConstants.UserReference.child(uid).observe(.value) { [weak self] snapshot  in
             
             guard let userDict = snapshot.value as? [String : Any] else {return} // snapshot is nothing but the data received from the user loc
             let loggedInUser = UserItem(dictionary: userDict)

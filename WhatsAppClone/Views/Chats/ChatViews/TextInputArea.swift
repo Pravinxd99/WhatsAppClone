@@ -8,7 +8,14 @@
 import SwiftUI
 
 struct TextInputArea: View {
-    @State var enteredText : String = ""
+    @Binding var enteredText : String
+    
+    private var buttonEnabler : Bool {
+        
+        enteredText.isEmptyOrWhiteSpaces
+    }
+    
+    var onSent : () -> Void
     var body: some View {
         HStack (alignment: .bottom, spacing: 5){
             Button {
@@ -42,6 +49,8 @@ struct TextInputArea: View {
                         
                 }
             uploadButton()
+                .disabled(buttonEnabler)
+                .grayscale (buttonEnabler ? 0.8 : 0.2)
         }
         .padding(.bottom)
         .padding(.horizontal , 8)
@@ -58,6 +67,7 @@ struct TextInputArea: View {
     private func uploadButton () -> some View {
         Button {
             
+            onSent()
         }
         label: {
             Image(systemName: "arrow.up")
@@ -75,5 +85,8 @@ struct TextInputArea: View {
 }
 
 #Preview {
-    TextInputArea()
+    TextInputArea(enteredText: .constant("")){
+        
+    }
+    
 }

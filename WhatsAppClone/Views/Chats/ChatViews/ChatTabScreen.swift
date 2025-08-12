@@ -18,11 +18,12 @@ struct ChatTabScreen: View {
             List {
                 Archived()
                
-                ForEach(0..<5){ _ in
+                ForEach(viewModel.channels){ channelName in
                     NavigationLink {
-                        ChatRoomScreen(channel: .sampleChannelItem)
-                    } label: {  
-                        Chats()
+                        ChatRoomScreen(channel: channelName)
+                    } label: {
+                        Chats(channel: channelName)
+                           
                     }
                 }
                    EncryptionMessage()

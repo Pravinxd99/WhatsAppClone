@@ -7,81 +7,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5EF59BBC-DD90-4B01-8EAA-EEC355E52D72"
+            uuid = "03DD625B-0C0E-423E-8DCE-922F8FCF6676"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhatsAppClone/AuthServices/AuthProvider.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "login(with:and:)"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "init()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8ACED4C5-6F91-4214-AC63-824CE46E0BF5"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WhatsAppClone/Views/Chats/ChatViews/AddGroupChatPartnerScreen.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "3AB27328-FA5D-49FD-B097-5DBECB35A5A8"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WhatsAppClone/Views/Chats/ChatViews/AddGroupChatPartnerScreen.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7DAD9AB7-5D62-4C9F-A23A-F358A7E4A587"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WhatsAppClone/Views/Chats/ViewModel/ChatPickerScreenViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "createDirectChannel(chatPartner:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "21F7D240-F652-49F2-A5CD-BDD273FC3ACA"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WhatsAppClone/Views/Chats/ViewModel/ChatPickerScreenViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "createDirectChannel(chatPartner:completion:)"
-            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "03DD625B-0C0E-423E-8DCE-922F8FCF6676 - ad5038ef2a8f8aea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () async -&gt; () in WhatsAppClone.AuthManager.() -&gt; WhatsAppClone.AuthManager.init() -&gt; WhatsAppClone.AuthManager"
+                  moduleName = "WhatsAppClone.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/2266519/Desktop/WhatsAppClone/WhatsAppClone/AuthServices/AuthProvider.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55">
+               </Location>
+               <Location
+                  uuid = "03DD625B-0C0E-423E-8DCE-922F8FCF6676 - 81d062601590e5dd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) await resume partial function for closure #1 () async -&gt; () in WhatsAppClone.AuthManager.() -&gt; WhatsAppClone.AuthManager.init() -&gt; WhatsAppClone.AuthManager"
+                  moduleName = "WhatsAppClone.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/2266519/Desktop/WhatsAppClone/WhatsAppClone/AuthServices/AuthProvider.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

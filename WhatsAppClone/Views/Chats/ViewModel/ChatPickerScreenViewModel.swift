@@ -124,14 +124,28 @@ final class ChatPickerScreenViewModel : ObservableObject {
     func createDirectChannel ( chatPartner :UserItem, completion : @escaping (_ newChannel : ChannelItem) -> Void ){
         selectedChatPartners.append(chatPartner)
         
-        let channelCreation = createChannel(channelName: nil)
-        
-        switch channelCreation {
-        case .success(let channel):
-            completion(channel)
-        case .failure(let error):
-            errorMessages(message: "Something went wrong failed to create a new direct chat")
-            print("Error : \(error.localizedDescription)" )
+        Task {
+            if let channelId =  await verifyIfAlreadyChannelExists(charPartnerId: chatPartner.uid) ,
+               let snapshot = try? await FireBaseConstants.ChannelsReference.child(channelId).getData(),
+               var channelDict = snapshot.value as? [String:Any] {
+                var directChannel = ChannelItem(dictionary: channelDict)
+                directChannel.members = selectedChatPartners
+                completion(directChannel)
+                
+                
+            }
+            else {
+                
+                let channelCreation = createChannel(channelName: nil)
+                
+                switch channelCreation {
+                case .success(let channel):
+                    completion(channel)
+                case .failure(let error):
+                    errorMessages(message: "Something went wrong failed to create a new direct chat")
+                    print("Error : \(error.localizedDescription)" )
+                }
+            }
         }
     }
     func createGroupChannel (groupName : String? , completion : @escaping (_ newChannel : ChannelItem) -> Void ){
@@ -147,11 +161,28 @@ final class ChatPickerScreenViewModel : ObservableObject {
         }
     }
     
+    typealias channelId = String
+    private func verifyIfAlreadyChannelExists ( charPartnerId : String) async -> channelId? {
+        
+        guard let currentUserUid = Auth.auth().currentUser?.uid  ,
+        
+                let snapshot = try?  await FireBaseConstants.UserdirectChannels.child(currentUserUid).child(charPartnerId).getData(),
+                snapshot.exists() else { return nil}
+        snapshot.exists()
+        let channelDict = snapshot.value as! [String : Bool]
+        let channelId = channelDict.compactMap{$0.key}.first
+        
+        return channelId
+        
+        
+    }
+    
     private func createChannel (channelName : String?)  -> Result<ChannelItem,Error> {
        
         guard !selectedChatPartners.isEmpty else {
             return .failure(CustomError.noUsers)
         }
+        //return .failure(CustomError.noUsers)
        
         guard let currentUserUid = Auth.auth().currentUser?.uid,
               let channelId = FireBaseConstants.ChannelsReference.childByAutoId().key ,

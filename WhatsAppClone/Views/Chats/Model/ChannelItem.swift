@@ -52,7 +52,7 @@ struct ChannelItem: Identifiable  {
     var getGroupChatName : String {
         
         let membersCount = membersExcludingMe.count
-        let memberNames : [String] = members.map{$0.username}
+        let memberNames : [String] = membersExcludingMe.map{$0.username}
         
         if membersCount == 2 {
             
@@ -63,7 +63,7 @@ struct ChannelItem: Identifiable  {
             return  memberNames.prefix(2).joined(separator: "," ) + " ,and \(remainingCount) + others"
         }
         
-        return "Unkown"
+        return "Unknown"
     }
     
     static let sampleChannelItem : ChannelItem = ChannelItem(id: "1", lastMessage: "This is the last message", channelCreationDate: Date(), lastMessageTimeStamp: Date(), members: [], membersCount: 5, membersuid: [], adminuid: [], createdBy: "")

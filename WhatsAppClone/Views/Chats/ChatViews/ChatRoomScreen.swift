@@ -9,11 +9,14 @@ import SwiftUI
 
 struct ChatRoomScreen: View {
     
+    @StateObject var viewModel = ChatScreenViewModel()
     var channel : ChannelItem
     var body: some View {
         MessageListView()
         .safeAreaInset(edge: .bottom) {
-            TextInputArea()
+            TextInputArea(enteredText: $viewModel.textMessage) { 
+                viewModel.sendMessage()
+            }
         }
         
         .navigationBarTitleDisplayMode(.inline)

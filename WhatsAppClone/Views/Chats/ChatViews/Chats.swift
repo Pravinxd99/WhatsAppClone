@@ -8,25 +8,47 @@
 import SwiftUI
 
 struct Chats: View {
+    
+    var channel : ChannelItem
     var body: some View {
-        HStack {
+        HStack (alignment: .top, spacing: 9){
             Circle()
-                .frame(width: 80 , height: 80)
+                .frame(width: 60 , height: 60)
             
-            VStack(alignment: .leading ){
-                Text("Username")
-                    .bold()
-                    .font(.title3)
-                Text("Hey welcome")
-                    .foregroundStyle(.gray)
+            
+            VStack(alignment: .leading, spacing: 5) {
+                titleTextView()
+                lastMessagePreview()
+                 
             }
+           
+        
+        }
+    }
+    
+    private func titleTextView () -> some View {
+        HStack(alignment: .bottom , spacing: 10){
+            Text(channel.title)
+                .lineLimit(1)
+                .bold()
+               
             Spacer()
-            Text("5:50 PM")
+            Text("5.50PM")
+                .font(.system(size: 15))
                 .foregroundStyle(.gray)
         }
     }
-}
+        
+        private func lastMessagePreview () -> some View {
+            Text(channel.lastMessage)
+                .font(.system(size: 16))
+                .foregroundStyle(.gray)
+                
+        }
+        
+    }
+
 
 #Preview {
-    Chats()
+    Chats(channel: .sampleChannelItem)
 }
