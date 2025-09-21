@@ -55,12 +55,12 @@ struct BubbleTextView: View {
 
 #Preview {
     ScrollView {
-        BubbleTextView(message: MessageItem.randomtMessageItem)
+       
         BubbleTextView(message: MessageItem.sentMessageItem)
         BubbleTextView(message: MessageItem.receivedMessageItem)
         BubbleImageView(message: .receivedMessageItem)
         BubbleImageView(message: .sentMessageItem)
-        BubbleImageView(message: .randomtMessageItem)
+        
     }
     .background(.gray.opacity(0.5))
 }

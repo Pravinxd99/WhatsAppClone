@@ -7,14 +7,18 @@
 
 import Foundation
 import SwiftUI
+import FirebaseAuth
 
 struct MessageItem {
-    
+    var timeStamp : Date
     var message : String
-    var uuid = UUID().uuidString
-    var direction : MessageDirection
+    var id : String
+    var direction : MessageDirection {
+        return ownerUid == Auth.auth().currentUser?.uid ? .sent : .received
+    }
     var messageType : MessageType
-    
+    let ownerUid : String
+   
     var horizontalAlignment : HorizontalAlignment {
         return direction == .received ? .leading : .trailing
     }
@@ -24,11 +28,26 @@ struct MessageItem {
     var backgroundColor : Color {
         direction == .sent ? Color.bubbleGreen : Color.bubbleWhite
     }
-    static let receivedMessageItem = MessageItem(message: "How are you bro , you alright ?", uuid: "80908y7t6r", direction: .received, messageType: .text)
-    static let sentMessageItem = MessageItem(message: "How are you doing", uuid: "80908y7t6r", direction: .sent, messageType: .text)
-    static let randomtMessageItem = MessageItem(message: "How are you doing bro", uuid: "80908y7t6r", direction: .random, messageType: .text)
     
-    static let differentKindOfMessages : [MessageItem] = [ MessageItem(message: "Text Message", direction: .sent, messageType: .text), MessageItem(message: "image message", direction: .received, messageType: .image) , MessageItem(message: "Video message", direction: .sent, messageType: .video) , MessageItem(message: "AudioMessage", direction: .sent, messageType: .audio) , MessageItem(message: "AudioMessage", direction: .received, messageType: .audio)]
+
+    static let receivedMessageItem = MessageItem(timeStamp: Date(), message: "Ethu Nagarjunavaa", id: UUID().uuidString, messageType: .text, ownerUid: "1")
+    static let sentMessageItem = MessageItem(timeStamp: Date(), message: "Whats up broskiee", id: UUID().uuidString, messageType: .text, ownerUid: "2")
+   
     
+    static let differentKindOfMessages : [MessageItem] = [MessageItem(timeStamp: Date(), message: "hi its a text message", id: UUID().uuidString, messageType: .text, ownerUid: "5"),
+                                                          MessageItem(timeStamp: Date(), message: "hi its a image message", id: UUID().uuidString, messageType: .image, ownerUid: "6"),
+                                                          MessageItem(timeStamp: Date(), message: "hi its a video message", id: UUID().uuidString, messageType: .video, ownerUid: "7"),
+                                                          MessageItem(timeStamp: Date(), message: "hi its a audio message", id: UUID().uuidString, messageType: .audio, ownerUid: "8")]
+}
+extension MessageItem {
+    init( id : String , dict : [String : Any]) {
+        self.id = id
+        self.message = dict[.text] as? String ?? ""
+        let type = dict[.type] as? String ?? "text"
+        self.messageType = MessageType(type)
+        self.ownerUid = dict[.owneruid] as? String ?? ""
+        let date = dict[.lastMessageTimeStamp] as? TimeInterval ?? 0
+        self.timeStamp = Date(timeIntervalSince1970: date)
+    }
 }
 

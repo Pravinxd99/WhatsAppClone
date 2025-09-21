@@ -13,7 +13,8 @@ struct BubbleTailView: View {
         direction == .received ? .bubbleWhite : .bubbleGreen
     }
     var body: some View {
-        Image(direction == .sent ? .outgoingTail : .incomingTail)
+        
+            Image(direction == .sent ? .outgoingTail : .incomingTail)
             .renderingMode(.template)
             .resizable()
             .frame(width: 10 , height: 10)

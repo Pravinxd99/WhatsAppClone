@@ -23,6 +23,8 @@ extension String {
     static let type = "type"
     static let creationTime = "creationtime"
     static let owneruid = "owneruid"
+    static let text = "text"
+    
 }
 
 enum MessageDirection  {
@@ -34,5 +36,33 @@ enum MessageDirection  {
 }
 
 enum MessageType {
-case text , video , image , audio
+    case text , video , image , audio
+    
+    var title : String {
+        switch self {
+        case .text:
+            "text"
+        case .video:
+            "video"
+        case .image:
+            "image"
+        case .audio:
+            "audio"
+        }
+    }
+    
+    init(_ stringValue : String) {
+        switch stringValue {
+            
+        case "text" :
+            self = .text
+        case "video" :
+            self = .video
+        case "photo" :
+            self = .image
+            
+        default :
+            self = .text
+        }
+    }
 }
