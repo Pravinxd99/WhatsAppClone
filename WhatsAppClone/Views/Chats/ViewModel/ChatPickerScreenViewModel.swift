@@ -221,7 +221,7 @@ final class ChatPickerScreenViewModel : ObservableObject {
             
         
         FireBaseConstants.ChannelsReference.child(channelId).setValue(channelDict)
-        FireBaseConstants.MessagesReference.child(messageId).setValue(messageDict)
+        FireBaseConstants.MessagesReference.child(channelId).child(messageId).setValue(messageDict)
        
         
         memberUids.forEach { userId   in

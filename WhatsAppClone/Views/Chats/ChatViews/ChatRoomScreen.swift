@@ -9,10 +9,14 @@ import SwiftUI
 
 struct ChatRoomScreen: View {
     
-    @StateObject var viewModel = ChatScreenViewModel()
+    @StateObject var viewModel : ChatRoomScreenViewModel
     var channel : ChannelItem
+    
+    init( channel: ChannelItem) {
+        self.channel = channel
+        _viewModel = StateObject(wrappedValue: ChatRoomScreenViewModel(channel: channel))}
     var body: some View {
-        MessageListView()
+        MessageListView(viewModel)
         .safeAreaInset(edge: .bottom) {
             TextInputArea(enteredText: $viewModel.textMessage) { 
                 viewModel.sendMessage()
