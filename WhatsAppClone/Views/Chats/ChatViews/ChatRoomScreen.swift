@@ -8,10 +8,15 @@
 import SwiftUI
 
 struct ChatRoomScreen: View {
+    
+    @StateObject var viewModel = ChatScreenViewModel()
+    var channel : ChannelItem
     var body: some View {
         MessageListView()
         .safeAreaInset(edge: .bottom) {
-            TextInputArea()
+            TextInputArea(enteredText: $viewModel.textMessage) { 
+                viewModel.sendMessage()
+            }
         }
         
         .navigationBarTitleDisplayMode(.inline)
@@ -44,7 +49,7 @@ struct ChatRoomScreen: View {
                 HStack{
                     Circle()
                         .frame(width: 40 , height: 35)
-                    Text("Praveen")
+                    Text(channel.title)
                         .bold()
                 }
             }
@@ -54,7 +59,7 @@ struct ChatRoomScreen: View {
 
 #Preview {
     NavigationStack{
-        ChatRoomScreen()
+        ChatRoomScreen(channel: .sampleChannelItem)
     }
     
 }

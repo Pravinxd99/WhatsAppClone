@@ -31,15 +31,4 @@ struct MessageItem {
     static let differentKindOfMessages : [MessageItem] = [ MessageItem(message: "Text Message", direction: .sent, messageType: .text), MessageItem(message: "image message", direction: .received, messageType: .image) , MessageItem(message: "Video message", direction: .sent, messageType: .video) , MessageItem(message: "AudioMessage", direction: .sent, messageType: .audio) , MessageItem(message: "AudioMessage", direction: .received, messageType: .audio)]
     
 }
-    
-    enum MessageDirection  {
-        case sent , received
-        
-       static  var random : MessageDirection {
-            return [.sent , .received].randomElement() ?? .sent
-        }
-    }
 
-enum MessageType {
-    case text , video , image , audio
-}

@@ -1,0 +1,37 @@
+
+Firebase is based upon NoSQL DB
+
+
+
+Channel
+
+
+Channel
+
+channelId : Random String
+admins : [uid, uid, uid]
+members : [uid , uid , uid]
+creationDate : Time Interval
+membersCount : Int
+
+Channel-Messages
+channelId
+messageId
+message : {
+text, timetamp,sender
+}
+
+
+User Direct Messages
+userId
+channelId1 : true
+channelId2 : true
+
+
+Direct Channels : unique , 1:1 communication
+Group Channels : non unique , 3 to 12 members
+
+
+storage is cheap in forebase
+
+denormalization : optimize for read operations

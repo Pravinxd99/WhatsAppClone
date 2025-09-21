@@ -24,6 +24,7 @@ extension View {
     
     func attachTail(direction : MessageDirection) -> some View {
         self.modifier(BubbleTailModifier(direction: direction))
+       
     }
     
 }

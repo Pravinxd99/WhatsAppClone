@@ -8,21 +8,25 @@
 import SwiftUI
 
 struct ChatTabScreen: View {
+    
+    @StateObject private var viewModel = ChatTabScreenViewModel()
+   
     @State var searchText : String = ""
-    @State var isPresented : Bool = false
+   
     var body: some View {
         NavigationStack {
             List {
                 Archived()
                
-                ForEach(0..<5){ _ in
+                ForEach(viewModel.channels){ channelName in
                     NavigationLink {
-                        ChatRoomScreen()
+                        ChatRoomScreen(channel: channelName)
                     } label: {
-                        Chats()
+                        Chats(channel: channelName)
+                           
                     }
                 }
-                EncryptionMessage()
+                   EncryptionMessage()
                     .listRowSeparator(.hidden)
                 
             }
@@ -33,11 +37,21 @@ struct ChatTabScreen: View {
                 leadingTbItem()
                 trailingingTbItem()
             }
+            .sheet(isPresented: $viewModel.showChatPartnerPickerView) {
+                ChatPartnerPickerScreen(onCreate: viewModel.onChannelCreation)
+            }
+            .navigationDestination(isPresented: $viewModel.navigateToChatRoom) {
+                if let newChannel = viewModel.channelName{
+                    ChatRoomScreen(channel: newChannel)
+                }
+            }
         }
-        .sheet(isPresented: $isPresented) {
-            ChatPartnerPickerScreen()
-        }
+        
+        
+        
     }
+    
+        
 }
 extension ChatTabScreen {
     @ToolbarContentBuilder
@@ -85,7 +99,7 @@ extension ChatTabScreen {
     private func plusButton () -> some View {
         
             Button {
-                isPresented = true
+                viewModel.showChatPartnerPickerView = true
                 
             } label: {
                 Image(.plus)

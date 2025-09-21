@@ -19,11 +19,21 @@ final class RootViewModel : ObservableObject {
         cancellable =  AuthManager.singletonAuthProvider.authState.receive(on: DispatchQueue.main) // publisher gets its updated from authstate.send from authmanager
         // sink is the subscription
             .sink {[weak self] latestAuthUser in
-                self?.authModel =  latestAuthUser
+                self?.authModel = latestAuthUser
             }
         
-        
+//        AuthManager.sampleUsers.forEach { email in
+//            registerTestAccount(with: email)
+//        }
+//        
     }
+    
+//    private func registerTestAccount(with email : String) {
+//        Task {
+//            let username = email.replacingOccurrences(of: "gmail.com", with: "")
+//            try? await AuthManager.singletonAuthProvider.createUser(_with: email, _and: "12345678", _also: username)
+//        }
+//    }
     
 }
 /* notes :
