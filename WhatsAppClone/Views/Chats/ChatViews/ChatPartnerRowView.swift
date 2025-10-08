@@ -18,8 +18,7 @@ struct ChatPartnerRowView<Content : View>: View {
     }
     var body: some View {
         HStack {
-            Circle()
-                .frame(width : 40 ,height: 40)
+            CircularProfileImageView(size: .small)
             VStack (alignment: .leading){
                 Text(user.username)
                     .bold()

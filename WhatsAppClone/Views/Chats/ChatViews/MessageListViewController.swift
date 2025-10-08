@@ -93,17 +93,27 @@ extension MessageListViewController : UITableViewDelegate , UITableViewDataSourc
             switch message.messageType {
                 
             case .text:
-             BubbleTextView(message: message)
-            
+                BubbleTextView(message: message)
+                
             case .image , .video:
                 BubbleImageView(message : message)
-            
+                
             case .audio:
                 BubbleAudioMessageView(message: message)
-            }
+            case .admin(type: let messageType):
+                switch messageType {
+                case .channelCreation:
+                    ChannelCreationTextView()
+                    if viewModel.channel.isGroupChat {
+                        AdminMessageTextView(channel: viewModel.channel)
+                    }
+                default :
+                    Text("Unknown   ")
+                }
                 
+            }
         }
-        cell.backgroundColor = UIColor.systemGray6
+        cell.backgroundColor = UIColor.clear
         cell.selectionStyle = .none
         
         

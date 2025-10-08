@@ -10,7 +10,7 @@ import Combine
 final class ChatRoomScreenViewModel : ObservableObject {
     @Published var messages = [MessageItem]()
     @Published var textMessage : String = ""
-    private let channel : ChannelItem
+    private(set) var channel : ChannelItem
     private var currentUser : UserItem?
     var cancellable = Set<AnyCancellable>()
     
