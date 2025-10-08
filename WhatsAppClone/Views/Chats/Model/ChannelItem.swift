@@ -20,9 +20,30 @@ struct ChannelItem: Identifiable  {
     var membersCount : Int
     var membersuid : [String]
     var adminuid :[String]
-    var thumbnailUrl : String?
+    private var thumbnailUrl : String?
     var createdBy : String
     
+    var coverImageUrl : String? {
+        if let thumbnailUrl = thumbnailUrl {
+            return thumbnailUrl
+        }
+        if isGroupChat ==  false {
+            return membersExcludingMe.first?.profileImage
+        }
+        return nil 
+    }
+    
+    var creatorName : String {
+        members.first{$0.uid == createdBy}?.username ?? "Someone"
+    }
+    var isCreatedByMe : Bool {
+        if createdBy == Auth.auth().currentUser?.uid {
+            return true
+        }
+        else {
+            return false
+        }
+    }
     var isGroupChat : Bool {
         
         self.membersCount > 2

@@ -208,6 +208,8 @@ final class ChatPickerScreenViewModel : ObservableObject {
             .lastMessage : newChannelBroadCast,
             .adminuid : [currentUserUid],
             .channelCreationDate : timestamp,
+            .createdBy : currentUserUid
+            
             
             
         ]

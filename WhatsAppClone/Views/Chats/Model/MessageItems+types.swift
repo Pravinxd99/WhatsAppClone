@@ -36,22 +36,9 @@ enum MessageDirection  {
 }
 
 enum MessageType {
-    case text , video , image , audio
+    case text , video , image , audio , admin(type : AdminMessageType)
     
-    var title : String {
-        switch self {
-        case .text:
-            "text"
-        case .video:
-            "video"
-        case .image:
-            "image"
-        case .audio:
-            "audio"
-        }
-    }
-    
-    init(_ stringValue : String) {
+    init?(_ stringValue : String) {
         switch stringValue {
             
         case "text" :
@@ -61,8 +48,47 @@ enum MessageType {
         case "photo" :
             self = .image
             
-        default :
-            self = .text
+        default:
+            if let adminMessageType = AdminMessageType(rawValue: stringValue ) {
+                self = .admin(type: adminMessageType)
+            }
+            else {
+                return nil
+            }
         }
+    }
+    
+    var title : String {
+        switch self {
+        case .text:
+            return "text"
+        case .video:
+            return "video"
+        case .image:
+            return "image"
+        case .audio:
+            return "audio"
+       
+        case .admin(type: let _type):
+            return "admin"
+        }
+    }
+    
+    
+}
+
+extension MessageType : Equatable {
+    
+    static func == (lhs : MessageType , rhs : MessageType) -> Bool {
+        switch (lhs , rhs) {
+        case (.text , .text) , (.audio , .audio) , (.video , .video),(.image , .image) :
+            return true
+        case (.admin(let leftAdmin) , .admin(type: let rightAdmin)):
+            return leftAdmin == rightAdmin
+        default :
+            return false
+        }
+        
+        
     }
 }

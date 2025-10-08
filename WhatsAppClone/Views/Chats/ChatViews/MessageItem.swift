@@ -44,7 +44,7 @@ extension MessageItem {
         self.id = id
         self.message = dict[.text] as? String ?? ""
         let type = dict[.type] as? String ?? "text"
-        self.messageType = MessageType(type)
+        self.messageType = MessageType(type) ?? .text
         self.ownerUid = dict[.owneruid] as? String ?? ""
         let date = dict[.lastMessageTimeStamp] as? TimeInterval ?? 0
         self.timeStamp = Date(timeIntervalSince1970: date)
