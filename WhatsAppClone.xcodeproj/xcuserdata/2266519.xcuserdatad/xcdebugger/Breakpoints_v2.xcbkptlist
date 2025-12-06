@@ -7,77 +7,61 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "58E7D14B-0ECE-4C03-A095-E58B29A663F5"
+            uuid = "92474790-90F3-4E4A-8AC6-48E9D76545FA"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhatsAppClone/Services/MessageServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "getMessages(channel:completion:)"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "getMessagesFromDB(channel:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4D14FFCD-E8B7-4967-BCFA-586C4416BF04"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WhatsAppClone/Views/Chats/ViewModel/ChatRoomScreenViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "getMessages()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "028A77A1-6E9F-4601-A614-E711A450F7DD"
+            uuid = "FA2B07D4-94FB-40D1-8583-2DA5ABCFC865"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhatsAppClone/Services/MessageServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "getMessages(channel:completion:)"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "getMessagesFromDB(channel:completion:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "028A77A1-6E9F-4601-A614-E711A450F7DD - dd1697b79d9a7031"
+                  uuid = "FA2B07D4-94FB-40D1-8583-2DA5ABCFC865 - 9af0336f753ec637"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.FIRDataSnapshot) -&gt; () in static WhatsAppClone.MessageServices.getMessages(channel: WhatsAppClone.ChannelItem, completion: (Swift.Array&lt;WhatsAppClone.MessageItem&gt;) -&gt; ()) -&gt; ()"
+                  symbolName = "closure #1 (Swift.String, Any) -&gt; () in closure #1 (__C.FIRDataSnapshot) -&gt; () in static WhatsAppClone.MessageServices.getMessagesFromDB(channel: WhatsAppClone.ChannelItem, completion: (Swift.Array&lt;WhatsAppClone.MessageItem&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "WhatsAppClone.debug.dylib"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/2266519/Desktop/WhatsAppClone/WhatsAppClone/Services/MessageServices.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40">
+                  startingLineNumber = "45"
+                  endingLineNumber = "45">
                </Location>
                <Location
-                  uuid = "028A77A1-6E9F-4601-A614-E711A450F7DD - cf674a3d6e48f40d"
+                  uuid = "FA2B07D4-94FB-40D1-8583-2DA5ABCFC865 - 15f8222b6681ee59"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String, Any) -&gt; () in closure #1 (__C.FIRDataSnapshot) -&gt; () in static WhatsAppClone.MessageServices.getMessages(channel: WhatsAppClone.ChannelItem, completion: (Swift.Array&lt;WhatsAppClone.MessageItem&gt;) -&gt; ()) -&gt; ()"
+                  symbolName = "closure #1 (WhatsAppClone.MessageItem, WhatsAppClone.MessageItem) -&gt; Swift.Bool in closure #1 (Swift.String, Any) -&gt; () in closure #1 (__C.FIRDataSnapshot) -&gt; () in static WhatsAppClone.MessageServices.getMessagesFromDB(channel: WhatsAppClone.ChannelItem, completion: (Swift.Array&lt;WhatsAppClone.MessageItem&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "WhatsAppClone.debug.dylib"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/2266519/Desktop/WhatsAppClone/WhatsAppClone/Services/MessageServices.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "41"
-                  endingLineNumber = "41">
+                  startingLineNumber = "45"
+                  endingLineNumber = "45">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -85,16 +69,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "53B6BEE7-7BA2-4BC8-BA5F-620988E6D352"
+            uuid = "82F33579-99BA-4E76-BD73-FA161E93BF53"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WhatsAppClone/Views/Chats/ViewModel/ChatPickerScreenViewModel.swift"
+            filePath = "WhatsAppClone/Services/MessageServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "createChannel(channelName:)"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "getMessagesFromDB(channel:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F0A40236-87BE-4FC0-A7B2-39CEF435D091"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WhatsAppClone/Views/Chats/ChatViews/MessageItem.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "init(id:dict:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8D6D2A1B-EE3A-4DCC-A4D8-2A116F9621F4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WhatsAppClone/Services/MessageServices.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "getMessagesFromDB(channel:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

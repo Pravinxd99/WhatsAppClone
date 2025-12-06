@@ -26,13 +26,14 @@ struct Chats: View {
     }
     
     private func titleTextView () -> some View {
+        
         HStack(alignment: .bottom , spacing: 10){
             Text(channel.title)
                 .lineLimit(1)
                 .bold()
                
             Spacer()
-            Text("5.50PM")
+            Text(channel.lastMessageTimeStamp.dayOrTimeRepresentation)
                 .font(.system(size: 15))
                 .foregroundStyle(.gray)
         }

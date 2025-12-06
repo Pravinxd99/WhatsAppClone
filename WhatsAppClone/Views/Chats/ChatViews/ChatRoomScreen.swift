@@ -36,15 +36,24 @@ struct ChatRoomScreen: View {
             Button {
                 
             }
+            
             label: {
                 Image(systemName: "video")
-                    .padding()
+                    .padding(10)
                 Image(systemName: "phone")
+                    .padding(10)
             }
             .bold()
         }
     }
+    @ToolbarContentBuilder
     private func leadingButton () -> some ToolbarContent {
+        var channenTitle : String {
+            let maxChars = 18
+            let title = channel.title.count > maxChars ? "..." : ""
+            let finalTitle = channel.title.prefix(15) + title
+            return String(finalTitle)
+        }
         ToolbarItemGroup(placement: .topBarLeading) {
             Button {
                 
@@ -53,7 +62,7 @@ struct ChatRoomScreen: View {
                 HStack{
                     Circle()
                         .frame(width: 40 , height: 35)
-                    Text(channel.title)
+                    Text(channenTitle)
                         .bold()
                 }
             }

@@ -34,7 +34,7 @@ struct BubbleTextView: View {
     private func timeStamp () -> some View {
         
         HStack{
-            Text("3:05 AM")
+            Text(message.timeStamp.formatToTime  )
                 .font(.caption2)
                
             

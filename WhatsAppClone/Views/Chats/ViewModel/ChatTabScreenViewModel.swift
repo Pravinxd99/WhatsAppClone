@@ -9,11 +9,13 @@ import Foundation
 import Firebase
 import FirebaseAuth
 
-
+enum ChatTabRoute : Hashable {
+    case channelRoute( channel : ChannelItem)
+}
 final class ChatTabScreenViewModel : ObservableObject {
     
     @Published var channelName : ChannelItem?
-    
+    @Published var navRoutes : [ChatTabRoute] = []
     @Published var navigateToChatRoom : Bool = false
     
     @Published var showChatPartnerPickerView : Bool = false

@@ -9,7 +9,7 @@ import Foundation
 import FirebaseAuth
 
 
-struct ChannelItem: Identifiable  {
+struct ChannelItem: Identifiable , Hashable  {
     
     var id : String
     var name : String?
@@ -117,8 +117,8 @@ extension ChannelItem {
         self.lastMessage = dictionary[.lastMessage] as? String ?? ""
         let creationDate = dictionary[.channelCreationDate] as? Double ?? 0
         self.channelCreationDate = Date(timeIntervalSince1970: creationDate)
-        let lastMessageTimeStamp = dictionary[.lastMessageTimeStamp] as? Double ?? 0
-        self.lastMessageTimeStamp = Date(timeIntervalSince1970 : lastMessageTimeStamp)
+        let lastMsgTimeStamp = dictionary[.lastMessageTimeStamp] as? Double ?? 0
+        self.lastMessageTimeStamp = Date(timeIntervalSince1970 : lastMsgTimeStamp)
         self.members = dictionary[.members] as? [UserItem] ?? []
         self.membersCount = dictionary[.membersCount] as? Int ?? 0
         self.membersuid = dictionary[.membersuid] as? [String] ?? []
@@ -128,3 +128,4 @@ extension ChannelItem {
        
     }
 }
+  
