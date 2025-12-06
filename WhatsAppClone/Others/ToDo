@@ -36,6 +36,3 @@ storage is cheap in forebase
 
 denormalization : optimize for read operations
 Bugs -> Error in channel.members
-1.as a result everything might me present as groupChat
-2.messages are still not sorted -> fixed
-3. did temporary fix for channel members so admin text is coming up in all chats -> eventhough expected as of now , debug
