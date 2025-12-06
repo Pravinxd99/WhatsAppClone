@@ -36,3 +36,4 @@ storage is cheap in forebase
 
 denormalization : optimize for read operations
 Bugs -> Error in channel.members
+bugs cleared -> date issue
