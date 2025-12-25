@@ -14,16 +14,16 @@ struct MessageServices {
         
         guard let messageId = FireBaseConstants.MessagesReference.childByAutoId().key else {return}
         let timeStamp = Date().timeIntervalSince1970
+        let channelDict : [String : Any] = [
+            .lastMessageTimeStamp : timeStamp,
+            .lastMessage : textMessage
+                    
+        ]
         let messageDict : [String : Any] = [
             .creationTime : timeStamp ,
             .type : MessageType.text.title ,
             .text : textMessage,
             .owneruid : user.uid
-        ]
-        let channelDict : [String : Any] = [
-            .lastMessageTimeStamp : Date().timeIntervalSince1970,
-            .lastMessage : textMessage
-                    
         ]
         FireBaseConstants.ChannelsReference.child(channel.id).updateChildValues(channelDict)
         FireBaseConstants.MessagesReference.child(channel.id).child(messageId).setValue(messageDict)
@@ -32,14 +32,14 @@ struct MessageServices {
     }
     
     
-    static func getMessages ( channel : ChannelItem , completion : @escaping ([MessageItem]) -> Void) {
+    static func getMessagesFromDB ( channel : ChannelItem , completion : @escaping ([MessageItem]) -> Void) {
         
         FireBaseConstants.MessagesReference.child(channel.id).observe(.value) { snapshot in
             guard let dict = snapshot.value as? [String : Any] else { return }
             var messages : [MessageItem] = []
             dict.forEach { key , value in
                 let messageDict = value as? [String : Any] ?? [:]
-                let message = MessageItem(id: key, dict: messageDict)
+                let message = MessageItem(id: key, isGroupChat: channel.isGroupChat,  dict: messageDict)
                 messages.append(message)
                 if messages.count == snapshot.childrenCount {
                     messages.sort { $0.timeStamp < $1.timeStamp}

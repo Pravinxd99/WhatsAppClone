@@ -41,7 +41,7 @@ enum MessageType {
     init?(_ stringValue : String) {
         switch stringValue {
             
-        case "text" :
+        case .text :
             self = .text
         case "video" :
             self = .video

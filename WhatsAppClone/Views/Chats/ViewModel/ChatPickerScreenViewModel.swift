@@ -10,7 +10,7 @@ import SwiftUI
 import Firebase
 import FirebaseStorage
 import FirebaseAuth
-
+import Combine
 enum ChannelCreationRoute : Hashable{
     
     
@@ -32,7 +32,8 @@ enum CustomError : Error{
 
 @MainActor
 final class ChatPickerScreenViewModel : ObservableObject {
-    
+    var currentUser : UserItem?
+    var subscription : AnyCancellable?
     @Published var navItem = [ChannelCreationRoute]()
     @Published var selectedChatPartners = [UserItem]()
     @Published var users : [UserItem ] = []
@@ -50,10 +51,8 @@ final class ChatPickerScreenViewModel : ObservableObject {
     
     
     init() {
-        
-        Task {
-            await fetchUsers()
-        }
+        checkForAuthenticatedCurrentUser()
+
     }
     func fetchUsers () async    {
         do {
@@ -130,6 +129,9 @@ final class ChatPickerScreenViewModel : ObservableObject {
                var channelDict = snapshot.value as? [String:Any] {
                 var directChannel = ChannelItem(dictionary: channelDict)
                 directChannel.members = selectedChatPartners
+                if let currentUser {
+                    directChannel.members.append(currentUser)
+                }
                 completion(directChannel)
                 
                 
@@ -175,6 +177,21 @@ final class ChatPickerScreenViewModel : ObservableObject {
         return channelId
         
         
+    }
+    private func checkForAuthenticatedCurrentUser () {
+        subscription =  AuthManager.singletonAuthProvider.authState.sink { [weak self] userState in
+            switch userState {
+          
+                
+            case .loggedIn(let loggedInUser):
+                self?.currentUser = loggedInUser
+                Task {
+                    await self?.fetchUsers()
+                }
+            default :
+                break
+            }
+        }
     }
     
     private func createChannel (channelName : String?)  -> Result<ChannelItem,Error> {
@@ -240,7 +257,9 @@ final class ChatPickerScreenViewModel : ObservableObject {
         
         var newChannelItem = ChannelItem(dictionary: channelDict)
         newChannelItem.members = selectedChatPartners
-        
+        if let currentUser {
+            newChannelItem.members.append(currentUser)
+        }
         return .success(newChannelItem)
                                                        
      }

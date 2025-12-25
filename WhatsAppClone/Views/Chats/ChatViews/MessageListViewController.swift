@@ -87,8 +87,11 @@ extension MessageListViewController : UITableViewDelegate , UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:reuseIdentifier , for: indexPath)
-        cell.contentConfiguration = UIHostingConfiguration { // basically we use the uikit tableview but the swiftui view as a cell
-            let message = viewModel.messages[indexPath.row]
+        cell.backgroundColor = UIColor.clear
+        cell.selectionStyle = .none
+        let message = viewModel.messages[indexPath.row]
+        cell.contentConfiguration = UIHostingConfiguration {
+          
             
             switch message.messageType {
                 
@@ -108,14 +111,11 @@ extension MessageListViewController : UITableViewDelegate , UITableViewDataSourc
                         AdminMessageTextView(channel: viewModel.channel)
                     }
                 default :
-                    Text("Unknown   ")
+                    Text("Unknown")
                 }
                 
             }
         }
-        cell.backgroundColor = UIColor.clear
-        cell.selectionStyle = .none
-        
         
         return cell
         

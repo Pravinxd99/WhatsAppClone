@@ -9,18 +9,20 @@ import SwiftUI
 
 struct ChatTabScreen: View {
     
-    @StateObject private var viewModel = ChatTabScreenViewModel()
+    @StateObject private var viewModel : ChatTabScreenViewModel
    
     @State var searchText : String = ""
-   
+    init(_ currentUser : UserItem) {
+        self._viewModel = StateObject(wrappedValue: ChatTabScreenViewModel(currentUser: currentUser))
+    }
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $viewModel.navRoutes) {
             List {
                 Archived()
                
                 ForEach(viewModel.channels){ channelName in
-                    NavigationLink {
-                        ChatRoomScreen(channel: channelName)
+                    Button {
+                        viewModel.navRoutes.append(.channelRoute(channel: channelName))
                     } label: {
                         Chats(channel: channelName)
                            
@@ -37,6 +39,9 @@ struct ChatTabScreen: View {
                 leadingTbItem()
                 trailingingTbItem()
             }
+            .navigationDestination(for: ChatTabRoute.self, destination: { channel in
+                destinationChannel(route: channel)
+            })
             .sheet(isPresented: $viewModel.showChatPartnerPickerView) {
                 ChatPartnerPickerScreen(onCreate: viewModel.onChannelCreation)
             }
@@ -67,6 +72,13 @@ extension ChatTabScreen {
                 Image(systemName: "ellipsis.circle")
             }
             
+        }
+    }
+    @ViewBuilder
+    private func destinationChannel (route : ChatTabRoute) -> some View {
+        switch route {
+        case .channelRoute(let channel):
+            ChatRoomScreen(channel: channel)
         }
     }
     @ToolbarContentBuilder
@@ -151,5 +163,5 @@ private struct EncryptionMessage : View {
 
 
 #Preview {
-    ChatTabScreen()
+    ChatTabScreen(sampleUserItem.sampleUserInstance)
 }
