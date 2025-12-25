@@ -12,7 +12,11 @@ struct BubbleAudioMessageView: View {
     @State var sliderValue : Double = 0
     @State var sliderRange : ClosedRange<Double> = 0...20
     var body: some View {
-        VStack(alignment: message.horizontalAlignment, spacing: 3){
+        HStack(alignment: .bottom, spacing: 5){
+            if message.showGroupPartnerInfo {
+                CircularProfileImageView(profileImage: message.sender?.profileImage, size: .small)
+                    
+            }
             playButton()
                 .background(Color.gray.opacity(0.1))
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
@@ -77,7 +81,12 @@ struct BubbleAudioMessageView: View {
 }
 
 #Preview {
-    BubbleAudioMessageView(message: .sentMessageItem)
-        .background(Color(.systemGray6))
+    ZStack {
+        Color(.systemGray3)
+        BubbleAudioMessageView(message: .sentMessageItem)
+    }
+    .ignoresSafeArea()
+  
+        
     
 }

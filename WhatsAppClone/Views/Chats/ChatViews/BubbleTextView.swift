@@ -11,45 +11,36 @@ struct BubbleTextView: View {
     var message : MessageItem
     var body: some View {
         
-            VStack(alignment : message.horizontalAlignment, spacing: 3) {
-                Text(message.message)
-                    .font(.callout)
-                    .padding(10)
-                    .background(message.backgroundColor)
-                    .clipShape(RoundedRectangle(cornerRadius: 10 , style: .circular))
-                    .attachTail(direction: message.direction)
-                    .padding(2)
-                    .frame(maxWidth: .infinity , alignment: message.alignment)
-                    .padding(.leading , message.direction == .sent ? 100 :5)
-                    .padding(.trailing , message.direction == .sent ? 5 :100)
-                
+        HStack(alignment : .bottom, spacing: 5) {
+            if message.showGroupPartnerInfo {
+                CircularProfileImageView(profileImage :  message.sender?.profileImage ,size: .mini)
+            }
+            if message.direction == .sent{
                 timeStamp()
             }
-            .padding(.leading)
-            .padding(.trailing)
-            
+            Text(message.message)
+                .padding(10)
+                .background(message.backgroundColor)
+                .clipShape(RoundedRectangle(cornerRadius: 16 , style: .continuous))
+                .attachTail(direction: message.direction)
+            if message.direction == .received{
+                timeStamp()
+            }
         }
-    
-    
-    private func timeStamp () -> some View {
+                    .frame(maxWidth: .infinity , alignment: message.alignment)
+                    .padding(.leading , message.leadingPadding)
+                    .padding(.trailing , message.trailingPadding)
+                
+               
+            }
+            
+   private func timeStamp () -> some View {
         
         HStack{
             Text(message.timeStamp.formatToTime  )
-                .font(.caption2)
-               
-            
-            if message.direction == .sent {
-                Image(.seen)
-                    .resizable()
-                    .renderingMode(.template)
-                    .frame(width: 15,height: 15)
-                    .foregroundStyle(Color(.systemBlue))
-            }
+                .font(.footnote)
              
         }
-        .padding(.leading)
-        .padding(.trailing)
-        
     }
 }
 
@@ -58,8 +49,8 @@ struct BubbleTextView: View {
        
         BubbleTextView(message: MessageItem.sentMessageItem)
         BubbleTextView(message: MessageItem.receivedMessageItem)
-        BubbleImageView(message: .receivedMessageItem)
-        BubbleImageView(message: .sentMessageItem)
+        BubbleImageView(message: MessageItem.receivedMessageItem)
+        BubbleImageView(message: MessageItem.sentMessageItem)
         
     }
     .background(.gray.opacity(0.5))

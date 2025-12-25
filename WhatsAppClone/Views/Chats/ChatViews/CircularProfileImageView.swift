@@ -8,16 +8,16 @@
 import SwiftUI
 import Kingfisher
 struct CircularProfileImageView: View {
-    var profileImage : String?
+    var profileImageUrl : String?
     var size : Size
     var fallbackImage : FallBackImage
     init(profileImage: String? = nil , size: Size) {
-        self.profileImage = profileImage
+        self.profileImageUrl = profileImage
         self.size = size
         self.fallbackImage = .directchannelImage
     }
     var body: some View {
-        if let image = profileImage {
+        if let image = profileImageUrl {
             KFImage(URL(string: image))
                 .resizable()
                 .placeholder({ProgressView() })
@@ -82,7 +82,7 @@ extension CircularProfileImageView {
 }
 extension CircularProfileImageView {
     init(_ channel : ChannelItem , size : Size ) {
-        self.profileImage = channel.coverImageUrl
+        self.profileImageUrl = channel.coverImageUrl
         self.size = size
         self.fallbackImage = FallBackImage(for: channel.membersCount)
     }

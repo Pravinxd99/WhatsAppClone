@@ -10,23 +10,28 @@ import SwiftUI
 struct BubbleImageView: View {
     var message : MessageItem
     var body: some View {
-        HStack {
+        HStack(alignment: .bottom, spacing: 5) {
             if message.direction == .sent {Spacer()}
-            
-            HStack {
-                if message.direction == .sent {shareButton()}
-                imageVideo()
+            if message.showGroupPartnerInfo {
+                CircularProfileImageView(profileImage: message.sender?.profileImage, size: .small)
+                    .offset(y:-27)
+            }
+              imageVideo()
+                .shadow(color: Color(.systemGray3).opacity(0.1),radius: 5,x:0 ,y: 20)
                     .overlay {
                         playButton()
                             .opacity( message.messageType == .video ? 1 :0)
                     }
-                if message.direction == .received {shareButton()}
+               
                 
-            }
+            
             if message.direction == .received {Spacer()}
             
         }
-        .padding(8)
+        .frame(maxWidth: .infinity , alignment: message.alignment)
+        .padding(.leading , message.leadingPadding)
+        .padding(.trailing , message.trailingPadding)
+        .padding(10)
     }
     
     private func playButton () -> some View  {
@@ -66,9 +71,9 @@ struct BubbleImageView: View {
                 .scaledToFill()
                 .frame(width: 250 , height: 180)
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                .background{RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color(.systemGray))}
+                .background{RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color(.systemGray5))}
                 .overlay(
-                   RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(Color(.systemGray5))
+                    RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(Color(.systemGray5))
                 )
                 .padding(5)
                 .overlay(alignment: .bottomTrailing) {
@@ -76,10 +81,12 @@ struct BubbleImageView: View {
                         .padding(.vertical , 7)
                         .padding(.trailing)
                 }
-            Text(message.message)
-                .padding([.horizontal ,.bottom] ,8)
-                .frame(maxWidth: .infinity , alignment: .leading)
-                .frame(width: 220)
+            if !message.message.isEmptyOrWhiteSpaces {
+                Text(message.message)
+                    .padding([.horizontal ,.bottom] ,8)
+                    .frame(maxWidth: .infinity , alignment: .leading)
+                    .frame(width: 220)
+            }
         }
         .background(message.backgroundColor)
         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))

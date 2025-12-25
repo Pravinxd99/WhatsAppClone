@@ -44,6 +44,9 @@ struct ChannelItem: Identifiable , Hashable  {
             return false
         }
     }
+    var allMembersFetched : Bool {
+        return membersCount == members.count
+    }
     var isGroupChat : Bool {
         
         self.membersCount > 2

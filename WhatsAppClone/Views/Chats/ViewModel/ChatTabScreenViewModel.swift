@@ -17,7 +17,7 @@ final class ChatTabScreenViewModel : ObservableObject {
     @Published var channelName : ChannelItem?
     @Published var navRoutes : [ChatTabRoute] = []
     @Published var navigateToChatRoom : Bool = false
-    
+    var currentUser : UserItem
     @Published var showChatPartnerPickerView : Bool = false
     
     @Published var channels = [ChannelItem]()
@@ -32,8 +32,8 @@ final class ChatTabScreenViewModel : ObservableObject {
         showChatPartnerPickerView = false
     }
     
-    init() {
-        
+    init(currentUser : UserItem) {
+        self.currentUser = currentUser
         getCurrentUsersChannels() 
     }
     
@@ -61,12 +61,14 @@ final class ChatTabScreenViewModel : ObservableObject {
     func getChannel ( _ channelId : String)  {
         
         FireBaseConstants.ChannelsReference.child(channelId).observe(.value) { [weak self]  snapshot, _  in
-            guard  let channelDictionary = snapshot.value as? [String : Any] else {return}
+            guard  let channelDictionary = snapshot.value as? [String : Any] , let self = self else {return}
             var channel = ChannelItem(dictionary: channelDictionary)
-            self?.getChannelMembers(channel: channel) { members in
+            self.getChannelMembers(channel: channel) { members in
                 channel.members = members
-                self?.channelDictionary[channelId] = channel
-                self?.reloadData()
+                    channel.members.append(self.currentUser)
+               
+                self.channelDictionary[channelId] = channel
+                self.reloadData()
                 print("CHANNEL NAME : \(channel.title)")
             }
            

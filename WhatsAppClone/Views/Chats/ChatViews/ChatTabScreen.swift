@@ -9,10 +9,12 @@ import SwiftUI
 
 struct ChatTabScreen: View {
     
-    @StateObject private var viewModel = ChatTabScreenViewModel()
+    @StateObject private var viewModel : ChatTabScreenViewModel
    
     @State var searchText : String = ""
-   
+    init(_ currentUser : UserItem) {
+        self._viewModel = StateObject(wrappedValue: ChatTabScreenViewModel(currentUser: currentUser))
+    }
     var body: some View {
         NavigationStack(path: $viewModel.navRoutes) {
             List {
@@ -161,5 +163,5 @@ private struct EncryptionMessage : View {
 
 
 #Preview {
-    ChatTabScreen()
+    ChatTabScreen(sampleUserItem.sampleUserInstance)
 }

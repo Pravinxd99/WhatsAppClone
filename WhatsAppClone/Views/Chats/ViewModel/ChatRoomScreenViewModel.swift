@@ -34,10 +34,15 @@ final class ChatRoomScreenViewModel : ObservableObject {
       
          AuthManager.singletonAuthProvider.authState.receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] completion in
+                guard let self = self else {return}
                 switch completion {
                 case .loggedIn(let currentUser):
-                    self?.currentUser = currentUser
-                    self?.fetchAllChannelMembers()
+                    self.currentUser = currentUser
+                    if self.channel.allMembersFetched {
+                        getMessages()
+                    }else{
+                        self.fetchAllChannelMembers()
+                    }
                     print("executed fetch all channel members")
                 default :
                     break
@@ -64,25 +69,14 @@ final class ChatRoomScreenViewModel : ObservableObject {
     }
     
     func fetchAllChannelMembers () {
-        var membersUIDs = [String]()
+        
         guard let currentUser = currentUser else {return}
         let channelMembersAlreadyContained = channel.members.compactMap {$0.uid}
-       
-        if channel.isGroupChat {
-             membersUIDs = channel.membersuid.filter{!channelMembersAlreadyContained.contains($0)}
-        }
-        else if !channel.isGroupChat {
-            membersUIDs = channel.membersuid.compactMap {$0}
-            
-        }
-       // temporary fix is done , check later 
+        var membersUIDs = channel.membersuid.filter{!channelMembersAlreadyContained.contains($0)}
         membersUIDs = membersUIDs.filter{$0 != currentUser.id}
         UserServices.getUsers(with: membersUIDs) { [weak self] userNode in
             guard let self = self else {return}
             self.channel.members.append(contentsOf:userNode.users )
-            let uniqueChannelMembers = Set(channel.members)
-            channel.members = Array(uniqueChannelMembers)
-            self.channel.members.append(currentUser)
             self.getMessages()
             print("channel members :\(channel.members.map{$0.username})")
             print("channel members uids:\(channel.membersuid.compactMap{$0})")
