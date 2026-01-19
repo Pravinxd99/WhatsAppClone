@@ -15,11 +15,11 @@ struct TextInputArea: View {
         enteredText.isEmptyOrWhiteSpaces
     }
     
-    var onSent : () -> Void
+    var actionHandler : (_ tappedItem : UserAction) -> Void
     var body: some View {
         HStack (alignment: .bottom, spacing: 5){
             Button {
-                
+                actionHandler(.showPhotoPicker)
             }
             label: {Image(systemName: "photo.on.rectangle")
                     .padding(3)
@@ -67,7 +67,7 @@ struct TextInputArea: View {
     private func uploadButton () -> some View {
         Button {
             
-            onSent()
+            actionHandler(UserAction.sendMessage)
         }
         label: {
             Image(systemName: "arrow.up")
@@ -83,9 +83,16 @@ struct TextInputArea: View {
         }
     }
 }
+extension TextInputArea {
+    enum UserAction {
+        case showPhotoPicker
+        case sendMessage
+    }
+}
+
 
 #Preview {
-    TextInputArea(enteredText: .constant("")){
+    TextInputArea(enteredText: .constant("")){tappedItem in 
         
     }
     

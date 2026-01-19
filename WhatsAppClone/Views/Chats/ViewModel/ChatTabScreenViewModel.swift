@@ -34,7 +34,8 @@ final class ChatTabScreenViewModel : ObservableObject {
     
     init(currentUser : UserItem) {
         self.currentUser = currentUser
-        getCurrentUsersChannels() 
+        getCurrentUsersChannels()
+        
     }
     
     func getCurrentUsersChannels () {
@@ -50,12 +51,12 @@ final class ChatTabScreenViewModel : ObservableObject {
                 
                 self?.getChannel(channelId)
             }
+            
             }
             
          withCancel: { error in
             print("Failed to get current users channelsId's \(error.localizedDescription)")
         }
-            
         }
     
     func getChannel ( _ channelId : String)  {

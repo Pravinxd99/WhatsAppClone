@@ -15,60 +15,55 @@ struct BubbleAudioMessageView: View {
         HStack(alignment: .bottom, spacing: 5){
             if message.showGroupPartnerInfo {
                 CircularProfileImageView(profileImage: message.sender?.profileImage, size: .small)
-                    
+                    .offset(y:2)
+                
             }
-            playButton()
-                .background(Color.gray.opacity(0.1))
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                .padding(5)
-                .background(message.backgroundColor)
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            
-                .attachTail(direction: message.direction)
-                .padding(5)
-                .frame(maxWidth: .infinity , alignment: message.alignment)
-                .padding(.leading , message.direction == .received ? 5 :100)
-                .padding(.trailing , message.direction == .received ? 100 : 5)
-            
-            
-            timeStampWithTick()
-            
-        }
-    }
-    private func timeStampWithTick () -> some View {
-        HStack{
-            Text("3:05 AM")
-                .font(.caption)
-               
-            
             if message.direction == .sent {
-                Image(.seen)
-                    .resizable()
-                    .renderingMode(.template)
-                    .frame(width: 15,height: 15)
-                    .foregroundStyle(Color(.systemBlue))
+                timeStampWithTick()
             }
-             
+            HStack {
+                playButton()
+                Slider(value: $sliderValue , in: sliderRange)
+                    .tint(.gray)
+                Text("04:00")
+                    .foregroundStyle(.gray)
+            }
+            .padding(10)
+            .background(Color.gray.opacity(0.1))
+            .clipShape(RoundedRectangle(cornerRadius: 15, style: .circular))
+            .padding(5)
+            .background(message.backgroundColor)
+            .clipShape(RoundedRectangle(cornerRadius: 15, style: .circular))
+            
+            .attachTail(direction: message.direction)
+            if message.direction == .received {
+                timeStampWithTick()
+            }
+        }.padding()
+                .frame(maxWidth: .infinity , alignment: message.alignment)
+                .padding(.leading , message.leadingPadding)
+                .padding(.trailing , message.trailingPadding)
+            
         }
-        .padding(.leading)
-        .padding(.trailing)
-        
+    
+    private func timeStampWithTick () -> some View {
+            Text("3:05 AM")
+                .font(.footnote)
+                .foregroundStyle(.gray)
         }
 
     private func playButton () -> some View {
-        HStack {
+        Button {
+            
+        }label: {
             Image(systemName: "play.fill")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 15 , height: 15)
-                .padding()
-                .background(message.direction == .sent ? .white : .green)
-                .foregroundStyle(message.direction == .sent ? .black : .white)
+                .padding(10)
+                .background(message.direction == .received ? .green : .white)
                 .clipShape(Circle())
-            slider()
-            duration()
+                .foregroundStyle(message.direction == .received ? .white : .black)
+            
         }
-        .padding(4)
+       
     }
     private func slider () -> some View {
         Slider(value: $sliderValue , in: sliderRange)
@@ -83,7 +78,10 @@ struct BubbleAudioMessageView: View {
 #Preview {
     ZStack {
         Color(.systemGray3)
-        BubbleAudioMessageView(message: .sentMessageItem)
+        VStack{
+            BubbleAudioMessageView(message: .sentMessageItem)
+            BubbleAudioMessageView(message: .receivedMessageItem)
+        }
     }
     .ignoresSafeArea()
   

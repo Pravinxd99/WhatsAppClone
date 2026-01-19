@@ -18,17 +18,27 @@ struct ChatRoomScreen: View {
     var body: some View {
         MessageListView(viewModel)
         .safeAreaInset(edge: .bottom) {
-            TextInputArea(enteredText: $viewModel.textMessage) { 
-                viewModel.sendMessage()
-            }
+            bottomSafeAreaView()
         }
-        
+        .photosPicker(isPresented: $viewModel.showPhotoPicker, selection: $viewModel.photoPickerItems,maxSelectionCount: 5)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar() {
             leadingButton()
             trailingButton()
         }
         .toolbarVisibility(.hidden, for: .tabBar)
+    }
+    private func bottomSafeAreaView () -> some View {
+        VStack(spacing: 0) {
+            if viewModel.showPhotoPickerPreview {
+                Divider()
+                MediaAttachmentPreview(mediaAttachment: viewModel.mediaAttchments)
+                Divider()
+            }
+            TextInputArea(enteredText: $viewModel.textMessage) {tappedItem in 
+                viewModel.redirectToCorrectAction(action: tappedItem)
+            }
+        }
     }
     @ToolbarContentBuilder
     private func trailingButton () -> some ToolbarContent {

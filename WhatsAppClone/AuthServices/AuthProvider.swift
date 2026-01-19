@@ -69,6 +69,7 @@ final class AuthManager : AuthProvider {
         }
         catch {
             print("An error occured while creating the account")
+            print(error)
             throw AuthError.ErrorCreatingUserAccount(errordescription: error.localizedDescription)
         }
     }

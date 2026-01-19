@@ -8,17 +8,26 @@
 import Foundation
 import Combine
 import Firebase
+import PhotosUI
+import SwiftUI
 final class ChatRoomScreenViewModel : ObservableObject {
+    @Published var photoPickerItems : [PhotosPickerItem] = []
+    @Published var mediaAttchments : [MediaAttachment] = []
+    @Published var showPhotoPicker : Bool = false
     @Published var messages = [MessageItem]()
     @Published var textMessage : String = ""
     private(set) var channel : ChannelItem
     private var currentUser : UserItem?
+    var showPhotoPickerPreview : Bool {
+        return !mediaAttchments.isEmpty
+    }
     var cancellable = Set<AnyCancellable>()
     
     init (channel : ChannelItem)
     {
         self.channel = channel
         listenToAuthStates()
+        convertImagesForUI()
     }
     
     deinit {
@@ -82,6 +91,40 @@ final class ChatRoomScreenViewModel : ObservableObject {
             print("channel members uids:\(channel.membersuid.compactMap{$0})")
         }
         
+    }
+    func redirectToCorrectAction (action : TextInputArea.UserAction) {
+        switch action {
+        case .showPhotoPicker:
+            showPhotoPicker = true
+        case .sendMessage:
+            sendMessage()
+        }
+    }
+    
+    func convertImagesForUI () {
+        $photoPickerItems.sink { [weak self] photos in
+            guard let self = self else {return}
+            Task {
+                 await self.parsePhotoPickerItemsToUIImages(items: photos)
+            }
+        }.store(in: &cancellable)
+    }
+    
+    func parsePhotoPickerItemsToUIImages (items : [PhotosPickerItem]) async {
+        for item in items {
+            if item.isVideo {
+                if let movie = try? await item.loadTransferable(type: VideoPickerTransferable.self) {
+                    
+                }
+            }
+            else {
+                guard
+                    let data = try? await item.loadTransferable(type: Data.self),
+                    let thumbNail = UIImage(data: data) else {return}
+                let photoAttachment = MediaAttachment(id: UUID().uuidString, type: .photo(thumbNail))
+                self.mediaAttchments.insert(photoAttachment, at: 0)
+            }
+        }
     }
 }
 
