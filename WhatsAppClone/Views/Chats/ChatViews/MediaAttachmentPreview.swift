@@ -16,7 +16,7 @@ struct MediaAttachmentPreview: View {
                 ForEach(mediaAttachment) { attachment in
                     thumbnailImageView(attachment)
                 }
-            }
+            }.padding()
         } .frame(height: Constants.listHeight)
             .frame(maxWidth: .infinity)
             .background(.whatsAppWhite)
@@ -34,6 +34,7 @@ struct MediaAttachmentPreview: View {
                 .clipped()
                 .overlay(content: {
                     playButton("play.fill")
+                        .opacity(attachment.type == .video(UIImage(), .stubUrl) ? 1 : 0)
                 })
                 .overlay(alignment: .topTrailing) {
                     cancelButton()

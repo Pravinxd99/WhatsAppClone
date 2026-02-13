@@ -113,8 +113,9 @@ final class ChatRoomScreenViewModel : ObservableObject {
     func parsePhotoPickerItemsToUIImages (items : [PhotosPickerItem]) async {
         for item in items {
             if item.isVideo {
-                if let movie = try? await item.loadTransferable(type: VideoPickerTransferable.self) {
-                    
+                if let movie = try? await item.loadTransferable(type: VideoPickerTransferable.self) , let thumbnail = try? await movie.url.generateThumbnail() {
+                    let videoAttachment = MediaAttachment(id: UUID().uuidString, type: .video(thumbnail, movie.url))
+                    self.mediaAttchments.insert(videoAttachment, at: 0)
                 }
             }
             else {
